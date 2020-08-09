@@ -21,11 +21,30 @@ public class TwoSum {
         int[] nums ={1,3,5,7,8,3,11};
         int target = 10;
         TwoSum demo1 = new TwoSum();
-        int[] ints = demo1.twoSum(nums, target);
+        int[] ints = demo1.method1(nums, target);
         for (int i : ints)
             System.out.println(i);
     }
 
+    /**
+     * 暴力查找
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] method1(int[] nums, int target){
+        int[] result = {-1,-1};
+        for (int i=0;i<nums.length;i++){
+            for(int j =i+1;j<nums.length;j++){
+                if (i!=j && nums[i]+nums[j]==target){
+                    result[0] = i;
+                    result[1] = j;
+                    return result;
+                }
+            }
+        }
+        return result;
+    }
     /**
      * 排序+双端查找
      * @param nums
