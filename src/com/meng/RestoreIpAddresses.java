@@ -15,7 +15,7 @@ public class RestoreIpAddresses {
     public static void main(String[] args) {
         List<String> list = new ArrayList<>();
         RestoreIpAddresses demo = new RestoreIpAddresses();
-        list=demo.restoreIpAddresses("010010");
+        list=demo.violence("25525511135");
         System.out.println(list);
     }
     /**
@@ -62,5 +62,49 @@ public class RestoreIpAddresses {
             temp = temp +s+".";
         temp = temp.substring(0,temp.length()-1);
         list.add(temp);
+    }
+
+    /**
+     * 暴力遍历
+     * 性能较低于上述结果
+     * @param s
+     * @return
+     */
+    public List<String> violence(String s){
+        List<String> list = new ArrayList<>();
+        int length = s.length();
+        String s1 = "";
+        String s2 = "";
+        String s3 = "";
+        String s4 = "";
+        if (length > 12 || length<4)
+            return list;
+        for (int i =1 ; i< 4 ; i++){
+            s1=s.substring(0,i);
+            if (decide(s1)){
+                for (int j = i+1 ; j<i+4 && j<length;j++){
+                    s2=s.substring(i,j);
+                    if (decide(s2)){
+                        for (int t = j+1;t<j+4 &&t<length;t++){
+                            s3 = s.substring(j,t);
+                            if (decide(s3)){
+                                s4=s.substring(t);
+                                if (decide(s4)){
+                                    list.add(s1+"."+s2+"."+s3+"."+s4);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        return list;
+    }
+    private boolean decide(String s){
+        //判断当前字符是否小于256 并且不能为以0开头的非长度不为1的字符串
+        if (s.length()==0||Integer.parseInt(s) >= 256 || (s.startsWith("0") && s.length() != 1))
+            return false;
+        return true;
     }
 }
