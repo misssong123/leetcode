@@ -1,7 +1,5 @@
 package com.meng;
 
-import org.omg.CORBA.NO_IMPLEMENT;
-
 import java.util.*;
 
 /**
@@ -59,7 +57,7 @@ public class CloneGraph {
         ArrayList<Integer> list = new ArrayList<>();
         Node result = new Node(cur,new ArrayList<>());
         LinkedList<Node> pre = new LinkedList<>();
-        Map<Integer,Node> maps = new HashMap<>();
+        Map<Integer, Node> maps = new HashMap<>();
         maps.put(cur,result);
         pre.addLast(node);
         while(!pre.isEmpty()){
