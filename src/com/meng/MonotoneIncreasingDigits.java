@@ -51,6 +51,32 @@ public class MonotoneIncreasingDigits {
         return Integer.parseInt(new String(chars));
     }
 
+    /**
+     * 执行用时：6 ms, 在所有 Java 提交中击败了14.50% 的用户
+     * 内存消耗：35.7 MB, 在所有 Java 提交中击败了33.42% 的用户
+     * @param N
+     * @return
+     */
+    public int monotoneIncreasingDigits2(int N) {
+        if (N<10)
+            return N;
+        String s = N+"";
+        int len = s.length(),cur=0;
+        boolean flag = false;
+        char [] chars = s.toCharArray();
+        for(int i = len - 2 ; i>=0 ; i--){
+            if (chars[i]<=chars[i+1]){
+                continue;
+            }else {
+                chars[i] =(char)(chars[i]-1);
+                cur = i+1;
+                flag =true;
+            }
+        }
+        if (flag)
+            Arrays.fill(chars,cur,len,'9');
+        return Integer.parseInt(new String(chars));
+    }
     public static void main(String[] args) {
         MonotoneIncreasingDigits demo = new MonotoneIncreasingDigits();
         System.out.println(demo.monotoneIncreasingDigits(10));
