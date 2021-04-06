@@ -53,6 +53,13 @@ package com.meng;
  */
 public class RemoveDuplicates_80 {
     //使用快慢指针进行相关操作
+
+    /**
+     * 执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+     * 内存消耗：38.4 MB, 在所有 Java 提交中击败了82.43% 的用户
+     * @param nums
+     * @return
+     */
     public int removeDuplicates(int[] nums) {
         int len = nums.length;
         if (len < 3)
