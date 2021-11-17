@@ -85,6 +85,51 @@ public class MaxProduct {
     }
 
     /**
+     * 执行用时：
+     * 16 ms
+     * , 在所有 Java 提交中击败了
+     * 44.75%
+     * 的用户
+     * 内存消耗：
+     * 38.6 MB
+     * , 在所有 Java 提交中击败了
+     * 44.08%
+     * 的用户
+     * 通过测试用例：
+     * 167 / 167
+     * @param words
+     * @return
+     */
+    public int maxProductProv(String[] words) {
+        int max = 0;
+        int len = words.length;
+        Arrays.sort(words, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o2.length() - o1.length();
+            }
+        });
+        int[] masks = new int[len];
+        for (int i = 0; i < len; i++) {
+            String word = words[i];
+            int wordLength = word.length();
+            for (int j = 0; j < wordLength; j++) {
+                masks[i] |= 1 << (word.charAt(j) - 'a');
+            }
+        }
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (words[i].length() * words[j].length() <= max){
+                    break;
+                }
+                if ((masks[i] & masks[j]) == 0) {
+                    max = Math.max(max, words[i].length() * words[j].length());
+                }
+            }
+        }
+        return max;
+    }
+    /**
      * 方法一：位运算
      * 为了得到最大单词长度乘积，朴素的做法是，遍历字符串数组 \textit{words}words 中的每一对单词，判断这一对单词是否有公共字母，如果没有公共字母，则用这一对单词的长度乘积更新最大单词长度乘积。
      *
