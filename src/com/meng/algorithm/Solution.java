@@ -1,8 +1,124 @@
 package com.meng.algorithm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+/**
+ * 给定一个正整数数组 w ，其中 w[i] 代表下标 i 的权重（下标从 0 开始），请写一个函数 pickIndex ，它可以随机地获取下标 i，选取下标 i 的概率与 w[i] 成正比。
+ *
+ * 例如，对于 w = [1, 3]，挑选下标 0 的概率为 1 / (1 + 3) = 0.25 （即，25%），而选取下标 1 的概率为 3 / (1 + 3) = 0.75（即，75%）。
+ *
+ * 也就是说，选取下标 i 的概率为 w[i] / sum(w) 。
+ *
+ *
+ *
+ * 示例 1：
+ *
+ * 输入：
+ * ["Solution","pickIndex"]
+ * [[[1]],[]]
+ * 输出：
+ * [null,0]
+ * 解释：
+ * Solution solution = new Solution([1]);
+ * solution.pickIndex(); // 返回 0，因为数组中只有一个元素，所以唯一的选择是返回下标 0。
+ *
+ * 示例 2：
+ *
+ * 输入：
+ * ["Solution","pickIndex","pickIndex","pickIndex","pickIndex","pickIndex"]
+ * [[[1,3]],[],[],[],[],[]]
+ * 输出：
+ * [null,1,1,1,1,0]
+ * 解释：
+ * Solution solution = new Solution([1, 3]);
+ * solution.pickIndex(); // 返回 1，返回下标 1，返回该下标概率为 3/4 。
+ * solution.pickIndex(); // 返回 1
+ * solution.pickIndex(); // 返回 1
+ * solution.pickIndex(); // 返回 1
+ * solution.pickIndex(); // 返回 0，返回下标 0，返回该下标概率为 1/4 。
+ *
+ * 由于这是一个随机问题，允许多个答案，因此下列输出都可以被认为是正确的:
+ * [null,1,1,1,1,0]
+ * [null,1,1,1,1,1]
+ * [null,1,1,1,0,0]
+ * [null,1,1,1,0,1]
+ * [null,1,0,1,0,0]
+ * ......
+ * 诸若此类。
+ *
+ *
+ *
+ * 提示：
+ *
+ *     1 <= w.length <= 10000
+ *     1 <= w[i] <= 10^5
+ *     pickIndex 将被调用不超过 10000 次
+ *
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/random-pick-with-weight
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+public class Solution {
+    int[] pre;
+    int total;
+
+    /**
+     * 方法一：前缀和 + 二分查找
+     *
+     * 思路与算法
+     *
+     * 设数组 www 的权重之和为 total\textit{total}total。根据题目的要求，我们可以看成将 [1,total][1, \textit{total}][1,total] 范围内的所有整数分成 nnn 个部分（其中 nnn 是数组 www 的长度），第 iii 个部分恰好包含 w[i]w[i]w[i] 个整数，并且这 nnn 个部分两两的交集为空。随后我们在 [1,total][1, \textit{total}][1,total] 范围内随机选择一个整数 xxx，如果整数 xxx 被包含在第 iii 个部分内，我们就返回 iii。
+     *
+     * 一种较为简单的划分方法是按照从小到大的顺序依次划分每个部分。例如 w=[3,1,2,4]w = [3, 1, 2, 4]w=[3,1,2,4] 时，权重之和 total=10\textit{total} = 10total=10，那么我们按照 [1,3],[4,4],[5,6],[7,10][1, 3], [4, 4], [5, 6], [7, 10][1,3],[4,4],[5,6],[7,10] 对 [1,10][1, 10][1,10] 进行划分，使得它们的长度恰好依次为 3,1,2,43, 1, 2, 43,1,2,4。可以发现，每个区间的左边界是在它之前出现的所有元素的和加上 111，右边界是到它为止的所有元素的和。因此，如果我们用 pre[i]\textit{pre}[i]pre[i] 表示数组 www 的前缀和：
+     *
+     * pre[i]=∑k=0iw[k]\textit{pre}[i] = \sum_{k=0}^i w[k] pre[i]=k=0∑i​w[k]
+     *
+     * 那么第 iii 个区间的左边界就是 pre[i]−w[i]+1\textit{pre}[i] - w[i] + 1pre[i]−w[i]+1，右边界就是 pre[i]\textit{pre}[i]pre[i]。
+     *
+     * 当划分完成后，假设我们随机到了整数 xxx，我们希望找到满足：
+     *
+     * pre[i]−w[i]+1≤x≤pre[i]\textit{pre}[i] - w[i] + 1 \leq x \leq \textit{pre}[i] pre[i]−w[i]+1≤x≤pre[i]
+     *
+     * 的 iii 并将其作为答案返回。由于 pre[i]\textit{pre}[i]pre[i] 是单调递增的，因此我们可以使用二分查找在 O(log⁡n)O(\log n)O(logn) 的时间内快速找到 iii，即找出最小的满足 x≤pre[i]x \leq \textit{pre}[i]x≤pre[i] 的下标 iii。
+     *
+     * 作者：LeetCode-Solution
+     * 链接：https://leetcode-cn.com/problems/random-pick-with-weight/solution/an-quan-zhong-sui-ji-xuan-ze-by-leetcode-h13t/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     * 官方解法
+     * @param w
+     */
+    public Solution(int[] w) {
+        pre = new int[w.length];
+        pre[0] = w[0];
+        for (int i = 1; i < w.length; ++i) {
+            pre[i] = pre[i - 1] + w[i];
+        }
+        total = Arrays.stream(w).sum();
+    }
+
+    public int pickIndex() {
+        int x = (int) (Math.random() * total) + 1;
+        return binarySearch(x);
+    }
+
+    private int binarySearch(int x) {
+        int low = 0, high = pre.length - 1;
+        while (low < high) {
+            int mid = (high - low) / 2 + low;
+            if (pre[mid] < x) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+}
+
+
 
 /**
  * 384. 打乱数组
@@ -37,7 +153,7 @@ import java.util.Random;
  * nums 中的所有元素都是 唯一的
  * 最多可以调用 5 * 104 次 reset 和 shuffle
  */
-public class Solution {
+class Solution384 {
     int [] origin;
     int [] nums;
 
@@ -56,7 +172,7 @@ public class Solution {
      * 10 / 10
      * @param nums
      */
-    public Solution(int[] nums) {
+    public Solution384(int[] nums) {
         this.nums = nums;
         origin = new int[nums.length];
         System.arraycopy(nums,0,origin,0,origin.length);
