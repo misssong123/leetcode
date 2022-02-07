@@ -80,21 +80,21 @@ public class CloneGraph {
 
 
 }
-class Node {
+class Node1 {
     public int val;
     public List<Node> neighbors;
 
-    public Node() {
+    public Node1() {
         val = 0;
         neighbors = new ArrayList<Node>();
     }
 
-    public Node(int val) {
+    public Node1(int val) {
         this.val = val;
         this.neighbors = new ArrayList<Node>();
     }
 
-    public Node(int val, ArrayList<Node> neighbors) {
+    public Node1(int val, ArrayList<Node> neighbors) {
         this.val = val;
         this.neighbors = neighbors;
     }
