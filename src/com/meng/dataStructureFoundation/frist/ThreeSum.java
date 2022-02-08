@@ -1,4 +1,4 @@
-package com.meng.dataStructureFoundation;
+package com.meng.dataStructureFoundation.frist;
 
 import java.util.*;
 
