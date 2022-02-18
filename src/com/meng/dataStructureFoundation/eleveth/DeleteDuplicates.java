@@ -26,7 +26,18 @@ package com.meng.dataStructureFoundation.eleveth;
  */
 public class DeleteDuplicates {
     /**
-     *
+     *执行用时：
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗：
+     * 40.5 MB
+     * , 在所有 Java 提交中击败了
+     * 21.10%
+     * 的用户
+     * 通过测试用例：
+     * 166 / 166
      * @param head
      * @return
      */
@@ -39,7 +50,7 @@ public class DeleteDuplicates {
         int val = head.val;
         boolean flag = true;
         while (head != null){
-            while (head.next != null && head.val == val){
+            while (head.next != null && head.next.val == val){
                 head = head.next;
                 flag = false;
             }
@@ -48,12 +59,36 @@ public class DeleteDuplicates {
                 temp = temp.next;
             }
             head = head.next;
-            val = head.val;
-            flag = true;
+            temp.next = null;
+            if (head != null){
+                val = head.val;
+                flag = true;
+            }
         }
         return res.next;
     }
-
+    public static void main(String[] args) {
+        //1->1->->2->3->4
+        ListNode l1 = new ListNode(1);
+        ListNode l2 = new ListNode(1);
+        ListNode l3 = new ListNode(2);
+        ListNode l4 = new ListNode(3);
+        ListNode l5 = new ListNode(4);
+        ListNode l6 = new ListNode(4);
+        ListNode l7 = new ListNode(4);
+        l1.next = l2;
+        l2.next = l3;
+        l3.next = l4;
+        l4.next = l5;
+        l5.next = l6;
+        l6.next = l7;
+        DeleteDuplicates demo = new DeleteDuplicates();
+        ListNode listNode = demo.deleteDuplicates(l1);
+        while (listNode != null){
+            System.out.print(listNode.val+"->");
+            listNode = listNode.next;
+        }
+    }
     /**
      * 方法一：一次遍历
      * 思路与算法
@@ -115,7 +150,5 @@ public class DeleteDuplicates {
         return dummy.next;
     }
 
-    public static void main(String[] args) {
 
-    }
 }
