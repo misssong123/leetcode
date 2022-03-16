@@ -1,6 +1,8 @@
 package com.meng.algorithmfundamentals.sixth;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -37,8 +39,44 @@ import java.util.Queue;
  * isConnected[i][j] == isConnected[j][i]
  */
 public class FindCircleNum {
+    /**
+     * 执行用时：
+     * 5 ms
+     * , 在所有 Java 提交中击败了
+     * 17.04%
+     * 的用户
+     * 内存消耗：
+     * 42.1 MB
+     * , 在所有 Java 提交中击败了
+     * 28.93%
+     * 的用户
+     * 通过测试用例：
+     * 113 / 113
+     * @param isConnected
+     * @return
+     */
     public int findCircleNum(int[][] isConnected) {
-        return -1;
+        int len = isConnected.length;
+        boolean[] flags = new boolean[len];
+        Queue<Integer> queue = new LinkedList<>();
+        int res = 0;
+        //遍历每一个节点，避免遗漏
+        for(int i = 0 ; i < len ; i++){
+            if (!flags[i]){
+                queue.add(i);
+                while (!queue.isEmpty()){
+                    Integer index = queue.poll();
+                    flags[index] = true;
+                    for(int j = 0 ; j < len ; j++){
+                        if (!flags[j] && isConnected[index][j] == 1){
+                            queue.add(j);
+                        }
+                    }
+                }
+                res++;
+            }
+        }
+        return res;
     }
 
     /**
