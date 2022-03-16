@@ -27,8 +27,36 @@ package com.meng.algorithmfundamentals.five;
  * 0 <= k <= 106
  */
 public class NumSubarrayProductLessThanK {
+    /**
+     * 执行用时：
+     * 4 ms
+     * , 在所有 Java 提交中击败了
+     * 99.97%
+     * 的用户
+     * 内存消耗：
+     * 47.6 MB
+     * , 在所有 Java 提交中击败了
+     * 43.53%
+     * 的用户
+     * 通过测试用例：
+     * 97 / 97
+     * @param nums
+     * @param k
+     * @return
+     */
     public int numSubarrayProductLessThanK(int[] nums, int k) {
-        return -1;
+        if (k <= 1) return 0;
+        int len = nums.length;
+        int left = 0 ,sum = 1;
+        int res = 0 ;
+        for(int i = 0 ; i < len ; i++){
+            sum *= nums[i];
+            while (sum>=k){
+                sum /= nums[left++];
+            }
+            res = res + i - left + 1;//记录以i为节点，left-i范围内的子数据
+        }
+        return res;
     }
 
     /**
@@ -62,6 +90,18 @@ public class NumSubarrayProductLessThanK {
      * @param nums
      * @param k
      * @return
+     * 执行用时：
+     * 33 ms
+     * , 在所有 Java 提交中击败了
+     * 22.36%
+     * 的用户
+     * 内存消耗：
+     * 46 MB
+     * , 在所有 Java 提交中击败了
+     * 51.17%
+     * 的用户
+     * 通过测试用例：
+     * 97 / 97
      */
     public int numSubarrayProductLessThanK1(int[] nums, int k) {
         if (k == 0) return 0;
@@ -105,6 +145,18 @@ public class NumSubarrayProductLessThanK {
      * @param nums
      * @param k
      * @return
+     * 执行用时：
+     * 4 ms
+     * , 在所有 Java 提交中击败了
+     * 99.97%
+     * 的用户
+     * 内存消耗：
+     * 48.1 MB
+     * , 在所有 Java 提交中击败了
+     * 8.55%
+     * 的用户
+     * 通过测试用例：
+     * 97 / 97
      */
     public int numSubarrayProductLessThanK2(int[] nums, int k) {
         if (k <= 1) return 0;
