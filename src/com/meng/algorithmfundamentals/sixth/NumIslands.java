@@ -41,10 +41,65 @@ import java.util.Queue;
  * grid[i][j] 的值为 '0' 或 '1'
  */
 public class NumIslands {
+    /**
+     * 超出时间限制
+     * @param grid
+     * @return
+     * 执行用时：
+     * 5 ms
+     * , 在所有 Java 提交中击败了
+     * 24.40%
+     * 的用户
+     * 内存消耗：
+     * 48.5 MB
+     * , 在所有 Java 提交中击败了
+     * 58.35%
+     * 的用户
+     * 通过测试用例：
+     * 49 / 49
+     */
     public int numIslands(char[][] grid) {
-        return -1;
+        int m = grid.length;
+        int n = grid[0].length;
+        int[] x = {0,0,-1,1};
+        int[] y = {-1,1,0,0};
+        Queue<int[]> queue = new LinkedList<>();
+        int res = 0;
+        for(int i = 0 ; i < m ; i++){
+            for(int j = 0 ; j < n ; j++){
+                if (grid[i][j]=='1'){
+                    queue.add(new int[]{i,j});
+                    while (!queue.isEmpty()){
+                        int[] poll = queue.poll();
+                        int oldX = poll[0];
+                        int oldY = poll[1];
+                        for(int k = 0 ; k < 4 ; k++){
+                            int newX = oldX + x[k];
+                            int newY = oldY + y[k];
+                            if (newX >=0 && newX < m && newY >=0 && newY < n && grid[newX][newY] == '1'){
+                                queue.add(new int[]{newX,newY});
+                                grid[newX][newY] = '0';
+                            }
+                        }
+                    }
+                    res++;
+                }
+            }
+        }
+
+        return res;
     }
 
+    public static void main(String[] args) {
+        char[][] chars = {
+                {'1','1','1','1','0'},
+                {'1','1','0','1','0'},
+                {'1','1','0','0','0'},
+                {'0','0','0','0','0'}
+        };
+        NumIslands demo = new NumIslands();
+        System.out.println(demo.numIslands(chars));
+    }
     /**
      * 方法一：深度优先搜索
      * 我们可以将二维网格看成一个无向图，竖直或水平相邻的 11 之间有边相连。
@@ -181,7 +236,7 @@ public class NumIslands {
      * 方法三：并查集
      * 同样地，我们也可以使用并查集代替搜索。
      *
-     * 为了求出岛屿的数量，我们可以扫描整个二维网格。如果一个位置为 11，则将其与相邻四个方向上的 11 在并查集中进行合并。
+     * 为了求出岛屿的数量，我们可以扫描整个二维网格。如果一个位置为 1，则将其与相邻四个方向上的 1 在并查集中进行合并。
      *
      * 最终岛屿的数量就是并查集中连通分量的数目。
      *
@@ -208,10 +263,8 @@ public class NumIslands {
         if (grid == null || grid.length == 0) {
             return 0;
         }
-
         int nr = grid.length;
         int nc = grid[0].length;
-        int num_islands = 0;
         UnionFind uf = new UnionFind(grid);
         for (int r = 0; r < nr; ++r) {
             for (int c = 0; c < nc; ++c) {
