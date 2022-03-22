@@ -1,4 +1,4 @@
-package com.meng.DataStructureFundamentals.second;
+package com.meng.DataStructureFundamentals.second02;
 
 import java.util.ArrayList;
 import java.util.Arrays;
