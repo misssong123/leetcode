@@ -72,6 +72,48 @@ public class DeleteAndEarn {
         return Math.max(selected,unselected);
     }
 
+    /**
+     *执行用时：
+     * 10 ms
+     * , 在所有 Java 提交中击败了
+     * 6.86%
+     * 的用户
+     * 内存消耗：
+     * 41.9 MB
+     * , 在所有 Java 提交中击败了
+     * 5.03%
+     * 的用户
+     * 通过测试用例：
+     * 49 / 49
+     * @param nums
+     * @return
+     */
+    public int deleteAndEarnProve(int[] nums) {
+        Arrays.sort(nums);
+        List<Integer> list = new ArrayList<>();
+        list.add(nums[0]);
+        for(int i = 1 ; i < nums.length ; i++){
+            int num = nums[i];
+            if (num == nums[i-1]){
+                list.set(list.size()-1,list.get(list.size()-1)+num);
+            }else if (num == nums[i-1] + 1){
+                list.add(num);
+            }else {
+                list.add(0);
+                list.add(num);
+            }
+        }
+        if (list.size() ==1){
+            return list.get(0);
+        }
+        int first = list.get(0), second = Math.max(list.get(0), list.get(1));
+        for (int i = 2; i < list.size(); i++) {
+            int temp = second;
+            second = Math.max(first + list.get(i), second);
+            first = temp;
+        }
+        return second;
+    }
     public static void main(String[] args) {
         DeleteAndEarn demo = new DeleteAndEarn();
         int res = demo.deleteAndEarn(new int[]{2,3,4});
