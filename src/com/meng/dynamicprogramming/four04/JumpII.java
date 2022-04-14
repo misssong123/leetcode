@@ -29,7 +29,7 @@ package com.meng.dynamicprogramming.four04;
  * 1 <= nums.length <= 104
  * 0 <= nums[i] <= 1000
  */
-public class Jump {
+public class JumpII {
     /**
      * 执行用时：
      * 1 ms
