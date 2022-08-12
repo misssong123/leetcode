@@ -248,7 +248,6 @@ public class NumIslands {
 
         int nr = grid.length;
         int nc = grid[0].length;
-        int num_islands = 0;
         UnionFind uf = new UnionFind(grid);
         for (int r = 0; r < nr; ++r) {
             for (int c = 0; c < nc; ++c) {
