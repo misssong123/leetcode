@@ -1,4 +1,4 @@
-package com.meng.collect.dynamic;
+package com.meng.collect.dynamic.others;
 
 import java.util.Arrays;
 

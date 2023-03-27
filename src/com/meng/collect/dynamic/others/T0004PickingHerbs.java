@@ -1,4 +1,4 @@
-package com.meng.collect.dynamic;
+package com.meng.collect.dynamic.others;
 
 /**
  * # [NOIP2005 普及组] 采药

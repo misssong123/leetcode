@@ -1,4 +1,4 @@
-package com.meng.collect.dynamic;
+package com.meng.collect.dynamic.others;
 
 /**
  * 剑指 Offer II 095. 最长公共子序列

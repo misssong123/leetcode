@@ -1,4 +1,4 @@
-package com.meng.collect.dynamic;
+package com.meng.collect.dynamic.others;
 
 /**
  * # [USACO07DEC]Charm Bracelet S
