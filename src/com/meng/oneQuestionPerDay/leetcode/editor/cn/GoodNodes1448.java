@@ -49,5 +49,35 @@ class GoodNodes1448 {
         dfs(root.left, max);
         dfs(root.right,max);
     }
+
+    /**
+     * 时间
+     * 详情
+     * 2ms
+     * 击败 100.00%使用 Java 的用户
+     * 内存
+     * 详情
+     * 48.12MB
+     * 击败 38.82%使用 Java 的用户
+     * @param root
+     * @return
+     */
+    public int goodNodes1(TreeNode root) {
+        return dfs1(root, Integer.MIN_VALUE);
+    }
+
+    public int dfs1(TreeNode root, int pathMax) {
+        if (root == null) {
+            return 0;
+        }
+        int res = 0;
+        if (root.val >= pathMax) {
+            res++;
+            pathMax = root.val;
+        }
+        res += dfs1(root.left, pathMax) + dfs1(root.right, pathMax);
+        return res;
+    }
+
 }
 
