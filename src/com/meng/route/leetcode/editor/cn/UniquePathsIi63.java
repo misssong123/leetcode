@@ -3,7 +3,7 @@ package com.meng.route.leetcode.editor.cn;
 import java.util.Arrays;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class SolutionUniquePathsWithObstacles {
     /**
      * 执行耗时:0 ms,击败了100.00% 的Java用户
      * 	内存消耗:39.5 MB,击败了40.74% 的Java用户
