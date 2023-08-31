@@ -1,6 +1,8 @@
+package com.meng.oneQuestionPerDay.leetcode.editor.cn;
+
 import java.util.*;
 
-class Solution {
+class SolutionMinTrioDegree1761 {
     /**
      * 1.计算单点的关联节点和入度
      * 2.计算组成的三元组
