@@ -1,3 +1,4 @@
+package com.meng.route.leetcode.editor.cn;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class SolutionMinFallingPathSum1289 {
