@@ -2,7 +2,7 @@ package com.meng.oneQuestionPerDay.leetcode.editor.cn;
 
 import java.util.*;
 
-class Solution {
+class SolutionMinimumJumps1654 {
 
     /**
      * 广度搜索
@@ -69,7 +69,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        SolutionMinimumJumps1654 solution = new SolutionMinimumJumps1654();
         int[] forbidden = {1998};
         int a = 1999 , b = 2000 ,x = 2000;
         System.out.println(solution.minimumJumps(forbidden,a,b,x));
