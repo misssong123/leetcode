@@ -1,6 +1,6 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class SolutionMinFallingPathSum1289 {
     /**
      * 解答成功:
      * 	执行耗时:1 ms,击败了99.94% 的Java用户
