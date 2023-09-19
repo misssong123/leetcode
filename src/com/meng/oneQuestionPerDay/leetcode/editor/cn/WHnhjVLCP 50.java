@@ -1,5 +1,6 @@
+package com.meng.oneQuestionPerDay.leetcode.editor.cn;
 
-class Solution {
+class SolutionGiveGemLCP50 {
     /**
      * 解答成功:
      * 	执行耗时:1 ms,击败了100.00% 的Java用户
@@ -47,6 +48,5 @@ class Solution {
         }
         return mx - mn;
     }
-
 }
 
