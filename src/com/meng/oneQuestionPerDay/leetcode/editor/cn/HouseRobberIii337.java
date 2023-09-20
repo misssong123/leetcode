@@ -19,7 +19,7 @@ import java.util.Map;
  *     }
  * }
  */
-class Solution {
+class SolutionRob337 {
     /**
      * 超时
      * @param root
