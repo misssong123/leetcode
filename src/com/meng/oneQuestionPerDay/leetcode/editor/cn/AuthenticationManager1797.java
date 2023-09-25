@@ -138,23 +138,23 @@ class AuthenticationManager {
  */
 class AuthenticationManager1 {
     int timeToLive;
-    Node head;
-    Node tail;
-    Map<String, Node> map;
+    Node1797 head;
+    Node1797 tail;
+    Map<String, Node1797> map;
 
     public AuthenticationManager1(int timeToLive) {
         this.timeToLive = timeToLive;
-        this.head = new Node(-1);
-        this.tail = new Node(-1);
+        this.head = new Node1797(-1);
+        this.tail = new Node1797(-1);
         this.head.next = this.tail;
         this.tail.prev = this.head;
-        this.map = new HashMap<String, Node>();
+        this.map = new HashMap<String, Node1797>();
     }
 
     public void generate(String tokenId, int currentTime) {
-        Node node = new Node(currentTime + timeToLive, tokenId);
+        Node1797 node = new Node1797(currentTime + timeToLive, tokenId);
         map.put(tokenId, node);
-        Node last = tail.prev;
+        Node1797 last = tail.prev;
         last.next = node;
         node.prev = last;
         tail.prev = node;
@@ -163,13 +163,13 @@ class AuthenticationManager1 {
 
     public void renew(String tokenId, int currentTime) {
         if (map.containsKey(tokenId) && map.get(tokenId).expire > currentTime) {
-            Node node = map.get(tokenId);
-            Node prev = node.prev;
-            Node next = node.next;
+            Node1797 node = map.get(tokenId);
+            Node1797 prev = node.prev;
+            Node1797 next = node.next;
             prev.next = next;
             next.prev = prev;
             node.expire = currentTime + timeToLive;
-            Node last = tail.prev;
+            Node1797 last = tail.prev;
             last.next = node;
             node.prev = last;
             tail.prev = node;
@@ -179,7 +179,7 @@ class AuthenticationManager1 {
 
     public int countUnexpiredTokens(int currentTime) {
         while (head.next.expire > 0 && head.next.expire <= currentTime) {
-            Node node = head.next;
+            Node1797 node = head.next;
             map.remove(node.key);
             head.next = node.next;
             node.next.prev = head;
@@ -188,21 +188,21 @@ class AuthenticationManager1 {
     }
 }
 
-class Node {
+class Node1797 {
     int expire;
     String key;
-    Node prev;
-    Node next;
+    Node1797 prev;
+    Node1797 next;
 
-    public Node(int expire) {
+    public Node1797(int expire) {
         this(expire, null, null, null);
     }
 
-    public Node(int expire, String key) {
+    public Node1797(int expire, String key) {
         this(expire, key, null, null);
     }
 
-    public Node(int expire, String key, Node prev, Node next) {
+    public Node1797(int expire, String key, Node1797 prev, Node1797 next) {
         this.expire = expire;
         this.key = key;
         this.prev = prev;
