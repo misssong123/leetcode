@@ -1,6 +1,6 @@
 package com.meng.oneQuestionPerDay.leetcode.editor.cn;
 
-class Solution {
+class SolutionDistMoney2591 {
     /**
      * 解答成功:
      * 	执行耗时:1 ms,击败了100.00% 的Java用户
