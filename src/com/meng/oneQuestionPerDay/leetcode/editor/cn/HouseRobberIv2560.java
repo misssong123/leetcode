@@ -1,8 +1,9 @@
+package com.meng.oneQuestionPerDay.leetcode.editor.cn;
 
 import java.util.Arrays;
 import java.util.TreeSet;
 
-class Solution {
+class SolutionMinCapability2560 {
     int res = Integer.MAX_VALUE;
     public int minCapability1(int[] nums, int k) {
         dfs(-2,0,0,nums,k);
@@ -27,12 +28,6 @@ class Solution {
         dfs(pre,index+1,max,nums,k);
     }
 
-    public static void main(String[] args) {
-        Solution demo = new Solution();
-        int[] nums = {2,7,9,3,1};
-        int k = 2;
-        System.out.println(demo.minCapability(nums,k));
-    }
 
     /**
      * 解答成功:
@@ -105,6 +100,5 @@ class Solution {
         }
         return lower;
     }
-
 }
 //leetcode submit region end(Prohibit modification and deletion)
