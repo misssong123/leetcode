@@ -1,4 +1,4 @@
-package com.meng.plan.day01;
+package com.meng.leetcode75;
 
 /**
  * 55. 跳跃游戏
