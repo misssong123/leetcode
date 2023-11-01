@@ -2,68 +2,73 @@ package com.meng.leetcode75;
 
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.Stack;
 
 public class DecodeString394 {
     /**
-     * 思路不清晰，出错
+     *
      * @param s
      * @return
      */
-    public String decodeStringError(String s) {
+    public String decodeString(String s) {
         StringBuilder sb = new StringBuilder();
         StringBuilder res = new StringBuilder();
-        Stack<Integer> numStack = new Stack<>();
-        Stack<String> strStack = new Stack<>();
-        int n = 0;
-        for(char c : s.toCharArray()){
-            if (c >= '0' && c <= '9'){
-                n = n*10 + c-'0';
-            }else if (c>='a'&&c<='z'){
+        LinkedList<Integer> numStack = new LinkedList<>();
+        LinkedList<String> strStack = new LinkedList<>();
+        int index = 0;
+        while (index < s.length()){
+            char c = s.charAt(index);
+            if (Character.isDigit(c)){//数字
+                int num = c - '0';
+                while (Character.isDigit(s.charAt(index+1))){
+                    num = num * 10 + s.charAt(++index) - '0';
+                }
+                numStack.addLast(num);
+            }else if (Character.isLetter(c)){//字母
                 sb.append(c);
-            }else if (c == '['){
-                if (n>0){
-                    numStack.push(n);
-                    n=0;
+            }else if (c == '['){//左括号
+                //判断前一个位置不是数字则默认加1,避免越界
+                if (index == 0 || !Character.isDigit(s.charAt(index-1))){
+                    numStack.addLast(1);
                 }
                 if (sb.length()>0){
-                    strStack.push(sb.toString());
-                    sb.delete(0,sb.length());
+                    strStack.addLast(sb.toString());
                 }
-            }else {
-                int num = numStack.isEmpty()?1:numStack.pop();
-                String str = sb.length()==0?strStack.pop():sb.toString();
+                //清除
                 sb.delete(0,sb.length());
-                for (int i = 1 ; i <= num ; i++){
-                    sb.append(str);
+            }else {//右括号
+                System.out.println(sb);
+                System.out.println(numStack);
+                System.out.println(strStack);
+                StringBuilder temp = new StringBuilder();
+                int count = numStack.removeLast();
+                if (s.charAt(index-1)==']'){
+                    sb.append(strStack.removeLast());
+                }
+                for(int i = 1 ; i <= count ;i++){
+                    temp.append(sb);
                 }
                 if (!strStack.isEmpty()){
-                    sb.insert(0,strStack.pop());
+                    temp.insert(0,strStack.removeLast());
                 }
-                if (numStack.isEmpty()){
-                    res.append(sb);
-                }else {
-                    strStack.push(sb.toString());
-                }
+                strStack.addLast(temp.toString());
                 sb.delete(0,sb.length());
+                System.out.println(strStack);
+                System.out.println("-------------------------");
             }
-        }
-        if (!strStack.isEmpty()){
-            int num = numStack.isEmpty()?1:numStack.pop();
-            String str = strStack.pop();
-            for (int i = 1 ; i <= num ; i++){
-                res.append(str);
-            }
+            index++;
         }
         if (sb.length()>0){
-            res.append(sb);
+            strStack.addLast(sb.toString());
+        }
+        for(String str : strStack){
+            res.append(str);
         }
         return res.toString();
     }
 
     public static void main(String[] args) {
         DecodeString394 demo = new DecodeString394();
-        String s =  "100[cd]";
+        String s =  "3[z]2[2[y]pq4[2[jk]e1[f]]]ef";
         System.out.println(demo.decodeString(s));
     }
 
@@ -79,7 +84,7 @@ public class DecodeString394 {
      * @param s
      * @return
      */
-    public String decodeString(String s) {
+    public String decodeString1(String s) {
         LinkedList<String> stk = new LinkedList<>();
         ptr = 0;
         while (ptr < s.length()) {
