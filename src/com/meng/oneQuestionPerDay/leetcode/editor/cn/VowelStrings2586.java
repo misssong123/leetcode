@@ -1,9 +1,10 @@
+package com.meng.oneQuestionPerDay.leetcode.editor.cn;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class VowelStrings2586 {
     static Set<Character> cache = new HashSet<>(Arrays.asList('a','e','i','o','u'));
 
     /**
@@ -51,6 +52,5 @@ class Solution {
         }
         return ans;
     }
-
 
 }
