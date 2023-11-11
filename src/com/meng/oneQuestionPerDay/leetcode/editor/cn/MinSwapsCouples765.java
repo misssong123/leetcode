@@ -2,12 +2,37 @@ package com.meng.oneQuestionPerDay.leetcode.editor.cn;
 
 class MinSwapsCouples765 {
     /**
-     * 无思路
+     * 时间
+     * 详情
+     * 0ms
+     * 击败 100.00%使用 Java 的用户
+     * 内存
+     * 详情
+     * 37.91MB
+     * 击败 56.51%使用 Java 的用户
      * @param row
      * @return
      */
-    public int minSwapsCouplesMy(int[] row) {
-        return -1;
+    public int minSwapsCouples(int[] row) {
+        int[] index =  new int[row.length];
+        for(int i = 0 ; i < row.length ; i++){
+            index[row[i]] = i;
+        }
+        int res = 0;
+        for(int i = 0 ; i < row.length ; i += 2){
+            if ((row[i]^1) == row[i+1]){
+                continue;
+            }
+            res++;
+            row[index[row[i]^1]] = row[i+1];
+            index[row[index[row[i]^1]]] =index[row[i]^1];
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        MinSwapsCouples765 demo = new MinSwapsCouples765();
+        System.out.println(demo.minSwapsCouples(new int[]{0,2,4,6,7,1,3,5}));
     }
 
     /**
@@ -128,7 +153,7 @@ class MinSwapsCouples765 {
      * @param row
      * @return
      */
-    public int minSwapsCouples(int[] row) {
+    public int minSwapsCouples3(int[] row) {
         int ans = 0;
         for (int i = 0; i < row.length; i += 2) {
             int x = row[i];
