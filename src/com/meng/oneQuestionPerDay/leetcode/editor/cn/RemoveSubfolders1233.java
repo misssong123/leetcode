@@ -86,12 +86,12 @@ class RemoveSubfolders1233 {
      * 32 / 32
      */
     public List<String> removeSubfolders2(String[] folder) {
-        Trie root = new Trie();
+        Trie1233 root = new Trie1233();
         for (int i = 0; i < folder.length; ++i) {
             List<String> path = split(folder[i]);
-            Trie cur = root;
+            Trie1233 cur = root;
             for (String name : path) {
-                cur.children.putIfAbsent(name, new Trie());
+                cur.children.putIfAbsent(name, new Trie1233());
                 cur = cur.children.get(name);
             }
             cur.ref = i;
@@ -118,24 +118,24 @@ class RemoveSubfolders1233 {
         return ret;
     }
 
-    public void dfs(String[] folder, List<String> ans, Trie cur) {
+    public void dfs(String[] folder, List<String> ans, Trie1233 cur) {
         if (cur.ref != -1) {
             ans.add(folder[cur.ref]);
             return;
         }
-        for (Trie child : cur.children.values()) {
+        for (Trie1233 child : cur.children.values()) {
             dfs(folder, ans, child);
         }
     }
 }
 
-class Trie {
+class Trie1233 {
     int ref;
-    Map<String, Trie> children;
+    Map<String, Trie1233> children;
 
-    public Trie() {
+    public Trie1233() {
         ref = -1;
-        children = new HashMap<String, Trie>();
+        children = new HashMap<String, Trie1233>();
     }
 }
 
