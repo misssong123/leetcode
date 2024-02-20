@@ -1,4 +1,4 @@
-//leetcode submit region begin(Prohibit modification and deletion)
+package com.meng.thinking.leetcode.editor.cn;//leetcode submit region begin(Prohibit modification and deletion)
 
 import com.meng.oneQuestionPerDay.leetcode.editor.cn.util.TreeNode;
 
