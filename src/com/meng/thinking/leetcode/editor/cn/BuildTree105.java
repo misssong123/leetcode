@@ -3,6 +3,7 @@ package com.meng.thinking.leetcode.editor.cn;//leetcode submit region begin(Proh
 import com.meng.oneQuestionPerDay.leetcode.editor.cn.util.TreeNode;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -58,7 +59,7 @@ class BuildTree105 {
         return root;
     }
 
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
+    public TreeNode buildTreeOfficial(int[] preorder, int[] inorder) {
         int n = preorder.length;
         // 构造哈希映射，帮助我们快速定位根节点
         indexMap = new HashMap<Integer, Integer>();
@@ -66,6 +67,42 @@ class BuildTree105 {
             indexMap.put(inorder[i], i);
         }
         return myBuildTree(preorder, inorder, 0, n - 1, 0, n - 1);
+    }
+
+    /**
+     * 2
+     * ms
+     * 击败
+     * 67.07%
+     * 使用 Java 的用户
+     * 消耗内存分布
+     * 43.14
+     * MB
+     * 击败
+     * 48.13%
+     * 使用 Java 的用户
+     */
+    public Map<Integer,Integer> preAndInOrderMap = new HashMap<>();
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        int n = inorder.length;
+        for(int i = 0 ; i < n ; i++){
+            preAndInOrderMap.put(inorder[i],i);
+        }
+        TreeNode root = preAndInOrderBuildDfs(preorder,0,n-1,0);
+        return root;
+    }
+
+    private TreeNode preAndInOrderBuildDfs(int[] preorder, int preLeft, int preRight,int inLeft) {
+        if(preLeft > preRight){
+            return null;
+        }
+        int val = preorder[preLeft];
+        int  inIndex = preAndInOrderMap.get(val);
+        int count  = inIndex - inLeft;
+        TreeNode root = new TreeNode(val);
+        root.left = preAndInOrderBuildDfs(preorder,preLeft+1,preLeft+count,inLeft);
+        root.right = preAndInOrderBuildDfs(preorder,preLeft+count+1,preRight,inIndex+1);
+        return root;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
