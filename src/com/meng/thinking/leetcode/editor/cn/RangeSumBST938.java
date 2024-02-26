@@ -66,12 +66,12 @@ class RangeSumBST938 {
             return 0;
         }
         if (root.val > high) {
-            return rangeSumBST(root.left, low, high);
+            return rangeSumBST1(root.left, low, high);
         }
         if (root.val < low) {
-            return rangeSumBST(root.right, low, high);
+            return rangeSumBST1(root.right, low, high);
         }
-        return root.val + rangeSumBST(root.left, low, high) + rangeSumBST(root.right, low, high);
+        return root.val + rangeSumBST1(root.left, low, high) + rangeSumBST1(root.right, low, high);
     }
 
     /**
