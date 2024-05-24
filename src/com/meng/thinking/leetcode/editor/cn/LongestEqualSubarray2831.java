@@ -15,7 +15,7 @@ class LongestEqualSubarray2831 {
      * @param k
      * @return
      */
-    public int longestEqualSubarray(List<Integer> nums, int k) {
+    public int longestEqualSubarrayMy(List<Integer> nums, int k) {
         Map<Integer,List<Integer>> cache = new HashMap<>();
         for(int i = 0 ;i < nums.size() ; i++){
             int num =  nums.get(i);
@@ -42,5 +42,40 @@ class LongestEqualSubarray2831 {
         }
         return ans;
     }
+    /**
+     * 执行用时分布
+     * 101
+     * ms
+     * 击败
+     * 16.04%
+     * 使用 Java 的用户
+     * 消耗内存分布
+     * 63.15
+     * MB
+     * 击败
+     * 66.58%
+     * 使用 Java 的用户
+     */
+    /**
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int longestEqualSubarray(List<Integer> nums, int k) {
+        int n = nums.size();
+        int ans = 0;
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int i = 0, j = 0; j < n; j++) {
+            cnt.put(nums.get(j), cnt.getOrDefault(nums.get(j), 0) + 1);
+            /*当前区间中，无法以 nums[i] 为等值元素构成合法等值数组*/
+            while (j - i + 1 - cnt.get(nums.get(i)) > k) {
+                cnt.put(nums.get(i), cnt.get(nums.get(i)) - 1);
+                i++;
+            }
+            ans = Math.max(ans, cnt.get(nums.get(j)));
+        }
+        return ans;
+    }
+
 }
-//leetcode submit region end(Prohibit modification and deletion)
