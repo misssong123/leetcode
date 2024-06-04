@@ -90,9 +90,17 @@ class CountPairsOfConnectableServers3067 {
     }
 
     /**
-     * 解答成功:
-     * 	执行耗时:260 ms,击败了47.01% 的Java用户
-     * 	内存消耗:44.5 MB,击败了86.18% 的Java用户
+     * 执行用时分布
+     * 145
+     * ms
+     * 击败
+     * 94.47%
+     * 复杂度分析
+     * 消耗内存分布
+     * 44.54
+     * MB
+     * 击败
+     * 83.64%
      * @param edges
      * @param signalSpeed
      * @return
@@ -113,10 +121,12 @@ class CountPairsOfConnectableServers3067 {
         int[] res = new int[n];
         for (int i = 0; i < n; i++) {
             int pre = 0;
-            for (int[] e : graph[i]) {
-                int cnt = dfs(e[0], i, e[1] % signalSpeed, signalSpeed, graph);
-                res[i] += pre * cnt;
-                pre += cnt;
+            if (graph[i].size() > 1){
+                for (int[] e : graph[i]) {
+                    int cnt = dfs(e[0], i, e[1] % signalSpeed, signalSpeed, graph);
+                    res[i] += pre * cnt;
+                    pre += cnt;
+                }
             }
         }
         return res;
