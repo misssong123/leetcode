@@ -13,7 +13,7 @@ class CarFleet853 {
      * @param speed
      * @return
      */
-    public int carFleet(int target, int[] position, int[] speed) {
+    public int carFleetMy(int target, int[] position, int[] speed) {
         int n = position.length;
         Map<Integer,Integer> cache = new HashMap<>();
         for(int i = 0 ; i < n ; i++){
@@ -38,6 +38,40 @@ class CarFleet853 {
         return list.size();
     }
 
+    /**
+     * 54
+     * ms
+     * 击败
+     * 98.67%
+     * 复杂度分析
+     * 消耗内存分布
+     * 59.76
+     * MB
+     * 击败
+     * 5.65%
+     * @param target
+     * @param position
+     * @param speed
+     * @return
+     */
+    public int carFleet(int target, int[] position, int[] speed) {
+        int n = position.length;
+        Map<Integer,Integer> cache = new HashMap<>();
+        for(int i = 0 ; i < n ; i++){
+            cache.put(position[i],speed[i]);
+        }
+        Arrays.sort(position);
+        List<Double> list = new ArrayList<>();
+        list.add((target-position[n-1])*1.0/cache.get(position[n-1]));
+        for(int i = n-2 ; i >= 0 ; i--){
+            //当前车队消耗
+            double time = (target-position[i])*1.0/cache.get(position[i]);
+            if (time > list.get(list.size()-1)){
+                list.add(time);
+            }
+        }
+        return list.size();
+    }
     /**
      * 解答成功:
      * 	执行耗时:69 ms,击败了77.08% 的Java用户
