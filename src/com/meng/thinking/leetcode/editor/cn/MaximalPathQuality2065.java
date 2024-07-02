@@ -1,3 +1,5 @@
+package com.meng.thinking.leetcode.editor.cn;
+
 import java.util.*;
 
 //leetcode submit region begin(Prohibit modification and deletion)
