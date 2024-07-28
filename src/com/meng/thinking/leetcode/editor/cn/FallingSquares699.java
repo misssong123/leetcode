@@ -12,7 +12,7 @@ import com.meng.oneQuestionPerDay.leetcode.editor.cn.util.TreeNode;
  *     TreeNode(int x) { val = x; }
  * }
  */
-class LowestCommonAncestor193LCR {
+class FallingSquares699 {
     /**
      * 解答成功:
      * 	执行耗时:6 ms,击败了100.00% 的Java用户
