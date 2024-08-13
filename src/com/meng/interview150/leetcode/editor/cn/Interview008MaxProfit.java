@@ -1,6 +1,4 @@
 package com.meng.interview150.leetcode.editor.cn;
-
-//leetcode submit region begin(Prohibit modification and deletion)
 class Interview008MaxProfit {
     /**
      * 贪心做法
