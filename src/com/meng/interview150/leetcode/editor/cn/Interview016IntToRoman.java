@@ -55,14 +55,17 @@ class Interview016IntToRoman {
         }
         return sb.toString();
     }
-    int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-    String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
 
     /**
-     *
+     *解答成功:
+     * 	执行耗时:5 ms,击败了27.26% 的Java用户
+     * 	内存消耗:43.4 MB,击败了28.60% 的Java用户
      * @param num
      * @return
      */
+    int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
     public String intToRoman(int num) {
         StringBuffer roman = new StringBuffer();
         for (int i = 0; i < values.length; ++i) {
