@@ -32,6 +32,15 @@ class Interview047LongestConsecutive {
         res = Math.max(res,temp);
         return res;
     }
+
+    /**
+     * 解答成功:
+     * 	执行耗时:11 ms,击败了99.99% 的Java用户
+     * 	内存消耗:55.5 MB,击败了88.65% 的Java用户
+     * @param nums
+     * @return
+     *
+     */
     public int longestConsecutive(int[] nums) {
         Set<Integer> num_set = new HashSet<Integer>();
         for (int num : nums) {
