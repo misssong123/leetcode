@@ -10,6 +10,7 @@ class Interview052IsValid {
      * @param s
      * @return
      */
+
     public boolean isValidMy(String s) {
         Stack<Character> cache = new Stack<>();
         for (char c : s.toCharArray()) {
