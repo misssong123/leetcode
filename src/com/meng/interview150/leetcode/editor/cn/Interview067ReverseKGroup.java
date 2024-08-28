@@ -3,16 +3,7 @@ package com.meng.interview150.leetcode.editor.cn;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
+
 class Interview067ReverseKGroup {
     /**
      * 解答成功:
@@ -48,6 +39,65 @@ class Interview067ReverseKGroup {
         return newHead.next;
     }
 
+    /**
+     * 0
+     * ms
+     * 击败
+     * 100.00%
+     * 复杂度分析
+     * 消耗内存分布
+     * 43.32
+     * MB
+     * 击败
+     * 30.30%
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode reverseKGroupMy2(ListNode head, int k) {
+        if(head == null || head.next == null||k==1) {
+            return head;
+        }
+        ListNode newHead = new ListNode(),pre = newHead;
+        ListNode slow = head,fast = head;
+        while (true){
+            for(int i = 1 ; i < k ; i++){
+                //当前数据不满足k个，则不反转
+                if (fast == null){
+                    break;
+                }
+                fast = fast.next;
+            }
+            //当前数据不满足k个，则不反转
+            if (fast == null){
+                break;
+            }
+            //记录下一个起点
+            ListNode newSlow = fast.next;
+            ListNode tempNode = new ListNode(-1);
+            ListNode temp = slow;
+            while (temp != fast){
+                ListNode next = temp.next;
+                temp.next = tempNode.next;
+                tempNode.next = temp;
+                temp = next;
+            }
+            //当前段最后一个节点
+            temp.next = tempNode.next;
+            tempNode.next = temp;
+            pre.next = fast;
+            //链接下一个起点
+            if (newSlow == null){
+                slow.next = null;
+            }else {
+                slow.next = newSlow;
+            }
+            pre = slow;
+            slow = newSlow;
+            fast = newSlow;
+        }
+        return newHead.next;
+    }
     /**
      * 解答成功:
      * 	执行耗时:0 ms,击败了100.00% 的Java用户
