@@ -83,7 +83,6 @@ class Interview080LowestCommonAncestor {
         return this.ans;
     }
     private TreeNode ans;
-    private int count = 0;
     private boolean dfs(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) return false;
         boolean lson = dfs(root.left, p, q);
