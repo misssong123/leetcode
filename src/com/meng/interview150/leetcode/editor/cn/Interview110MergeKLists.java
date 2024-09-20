@@ -16,30 +16,30 @@ class Interview110MergeKLists {
             return null;
         }
         int len = lists.length;
-        PriorityQueue<Node> queue = new PriorityQueue<>(len, Comparator.comparingInt(o -> o.node.val));
+        PriorityQueue<Node110> queue = new PriorityQueue<>(len, Comparator.comparingInt(o -> o.node.val));
         for(int i = 0 ; i < len; i++){
             if (lists[i]!= null){
-                queue.add(new Node(i, lists[i]));
+                queue.add(new Node110(i, lists[i]));
                 lists[i] = lists[i].next;
             }
         }
         ListNode head = new ListNode();
         ListNode cur = head;
         while (!queue.isEmpty()){
-            Node poll = queue.poll();
+            Node110 poll = queue.poll();
             cur.next = poll.node;
             cur = cur.next;
             if (lists[poll.index] != null){
-                queue.add(new Node(poll.index, lists[poll.index]));
+                queue.add(new Node110(poll.index, lists[poll.index]));
                 lists[poll.index] = lists[poll.index].next;
             }
         }
         return head.next;
     }
-    class Node{
+    class Node110{
         public int index;
         public ListNode node;
-        public Node(int index, ListNode node){
+        public Node110(int index, ListNode node){
             this.node = node;
             this.index = index;
         }
