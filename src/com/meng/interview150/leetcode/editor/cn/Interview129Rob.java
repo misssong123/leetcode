@@ -8,6 +8,7 @@ class Interview129Rob {
      * @param nums
      * @return
      */
+
     public int robMy(int[] nums) {
         int n = nums.length;
         int no = 0, yes = nums[0];
