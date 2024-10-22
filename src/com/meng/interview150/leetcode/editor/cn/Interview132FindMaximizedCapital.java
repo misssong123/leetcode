@@ -19,7 +19,7 @@ class Interview132FindMaximizedCapital {
      */
     public int findMaximizedCapitalMy(int k, int w, int[] profits, int[] capital) {
         PriorityQueue<int[]> baseData = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
-        PriorityQueue<int[]> maxProfit = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        PriorityQueue<Integer> maxProfit = new PriorityQueue<>((a, b) -> b - a);
         int len = profits.length;
         for(int i = 0 ; i < len ; i++){
             baseData.add(new int[]{profits[i],capital[i]});
@@ -27,10 +27,10 @@ class Interview132FindMaximizedCapital {
         while (k > 0){
             //构建当前所能完成的项目
             while(!baseData.isEmpty()&&baseData.peek()[1] <= w){
-                maxProfit.add(baseData.poll());
+                maxProfit.add(baseData.poll()[0]);
             }
-            if(!maxProfit.isEmpty()&&maxProfit.peek()[0] > 0){
-                w += maxProfit.poll()[0];
+            if(!maxProfit.isEmpty()&&maxProfit.peek() > 0){
+                w += maxProfit.poll();
             }else {
                 break;
             }
