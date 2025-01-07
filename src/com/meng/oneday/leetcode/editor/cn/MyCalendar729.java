@@ -36,8 +36,8 @@ class MyCalendar729 {
 
 /**
  * 解答成功:
- * 	执行耗时:26 ms,击败了67.08% 的Java用户
- * 	内存消耗:44.6 MB,击败了71.58% 的Java用户
+ * 	执行耗时:23ms击败77.23%的Java用户
+ * 	内存消耗:44.52MB,击败了86.93%的Java用户
  */
 class MyCalendarBinarySearch {
     TreeSet<int[]> booked;
@@ -53,7 +53,6 @@ class MyCalendarBinarySearch {
         }
         int[] tmp = {end, 0};
         int[] arr = booked.ceiling(tmp);
-        int[] prev = arr == null ? booked.last() : booked.lower(arr);
         if (arr == booked.first() || booked.lower(tmp)[1] <= start) {
             booked.add(new int[]{start, end});
             return true;
