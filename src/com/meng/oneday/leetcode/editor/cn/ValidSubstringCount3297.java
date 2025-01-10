@@ -81,14 +81,12 @@ class ValidSubstringCount3297 {
         if (S.length() < T.length()) {
             return 0;
         }
-
         char[] s = S.toCharArray();
         char[] t = T.toCharArray();
         int[] diff = new int[26]; // t 的字母出现次数与 s 的字母出现次数之差
         for (char c : t) {
             diff[c - 'a']++;
         }
-
         // 统计窗口内有多少个字母的出现次数比 t 的少
         int less = 0;
         for (int d : diff) {
@@ -96,7 +94,6 @@ class ValidSubstringCount3297 {
                 less++;
             }
         }
-
         long ans = 0;
         int left = 0;
         for (char c : s) {
@@ -133,7 +130,6 @@ class ValidSubstringCount3297 {
         for (char c : word2.toCharArray()) {
             diff[c - 'a']--;
         }
-
         long res = 0;
         int[] cnt = { (int) Arrays.stream(diff).filter(c -> c < 0).count() };
         int l = 0, r = 0;
