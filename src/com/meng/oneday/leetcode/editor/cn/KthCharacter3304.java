@@ -35,7 +35,43 @@ class KthCharacter3304 {
      * @param k
      * @return
      */
-    public char kthCharacter(int k) {
+    public char kthCharacterOther(int k) {
         return (char) ('a' + Integer.bitCount(k - 1));
+    }
+
+    /**
+     * 执行用时分布
+     * 1
+     * ms
+     * 击败
+     * 74.55%
+     * 复杂度分析
+     * 消耗内存分布
+     * 40.71
+     * MB
+     * 击败
+     * 73.64%
+     * @param k
+     * @return
+     */
+    public char kthCharacter(int k) {
+        int cnt = 0;
+        while (k > 0){
+            int num = Integer.toBinaryString(k).length() - 1;
+            if (k == (1 << num)){
+                cnt += num;
+            }else {
+                cnt ++;
+            }
+            k -= (1 << num);
+        }
+        return (char)('a' + cnt);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Integer.bitCount(4));
+        System.out.println(Integer.toBinaryString(11));
+        int num = 11;
+        System.out.println(num & ~(1 << Integer.toBinaryString(num).length() - 1));
     }
 }
