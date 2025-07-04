@@ -10,7 +10,6 @@ class KthCharacter3307 {
      * @return
      */
     public char kthCharacter3307(long k, int[] operations) {
-        int index = Long.toBinaryString(k-1).length() -1;
         int cnt = 0;
         while (k > 0){
             int num = Long.toBinaryString(k).length() - 1;
