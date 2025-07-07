@@ -1,3 +1,5 @@
+package com.meng.oneday.leetcode.editor.cn;
+
 import java.util.*;
 
 class MaxEvents1353 {
