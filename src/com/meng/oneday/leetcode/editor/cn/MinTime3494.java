@@ -83,4 +83,39 @@ class MinTime3494 {
         }
         return start + (long) mana[m - 1] * s[n];
     }
+    /**
+     * 解答成功:
+     * 	执行耗时:182 ms,击败了58.82% 的Java用户
+     * 	内存消耗:43.63 MB,击败了70.59% 的Java用户
+     * @param skill
+     * @param mana
+     * @return
+     */
+    public long minTime(int[] skill, int[] mana) {
+        int n = skill.length,m = mana.length;
+        long[] lastFinish = new long[n];
+        //完成第一瓶药水的时间
+        for(int i = 0 ; i < n ; i++){
+            lastFinish[i] = (long) mana[0] * skill[i];
+            if (i > 0){
+                lastFinish[i] += lastFinish[i-1];
+            }
+        }
+        //完成其他药水的时间
+        long diff = 0L;
+        for (int i = 1 ; i < m ; i++){
+            diff = (long) mana[i] * skill[n-1];
+            long suf = lastFinish[n-1];
+            for(int j = n - 2 ; j >= 0 ; j--){
+                long temp = Math.max(lastFinish[j] + (long) mana[i] * skill[j],suf);
+                diff += temp - suf;
+                suf = temp - (long) mana[i] * skill[j];
+            }
+            lastFinish[n-1] += diff;
+            for(int j = n - 2 ; j >= 0 ; j--){
+                lastFinish[j] = lastFinish[j+1] - (long) mana[i] * skill[j+1];
+            }
+        }
+        return lastFinish[n-1];
+    }
 }
