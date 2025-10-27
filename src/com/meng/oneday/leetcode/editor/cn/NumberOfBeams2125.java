@@ -33,6 +33,7 @@ class NumberOfBeams2125 {
      * @return
      */
     public int numberOfBeams(String[] bank) {
+
         int ans = 0;
         int preCnt = 0;
         for (String row : bank) {
