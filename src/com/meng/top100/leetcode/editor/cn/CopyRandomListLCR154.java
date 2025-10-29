@@ -8,6 +8,41 @@ import java.util.List;
 class CopyRandomListLCR154 {
     /**
      * 解答成功:
+     * 	执行耗时:0 ms,击败了100.00% 的Java用户
+     * 	内存消耗:43.51 MB,击败了75.15% 的Java用户
+     * @param head
+     * @return
+     */
+    public Node copyRandomList(Node head) {
+        if (head == null){
+            return null;
+        }
+        //复制每个节点,把新节点放到原节点的后面
+        for(Node node = head ; node != null ;node = node.next.next){
+            Node newNode = new Node(node.val);
+            newNode.next = node.next;
+            node.next = newNode;
+        }
+        //复制随机指针
+        for (Node node = head ; node != null ; node = node.next.next){
+            if (node.random != null){
+                node.next.random = node.random.next;
+            }
+        }
+        //构建新链表
+        Node newHead = head.next;
+        for (Node node = head ; node != null ; node = node.next){
+            Node newNode = node.next;
+            node.next = newNode.next;
+            if (newNode.next != null){
+                newNode.next = newNode.next.next;
+            }
+        }
+        return newHead;
+    }
+
+    /**
+     * 解答成功:
      * 	执行耗时:1 ms,击败了5.87% 的Java用户
      * 	内存消耗:43.7 MB,击败了16.14% 的Java用户
      * @param head
@@ -44,7 +79,7 @@ class CopyRandomListLCR154 {
      * @param head
      * @return
      */
-    public Node copyRandomList(Node head) {
+    public Node copyRandomListOther(Node head) {
         if (head == null) {
             return null;
         }
