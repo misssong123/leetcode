@@ -6,6 +6,38 @@ class GameOfLife_289 {
     /**
      * 解答成功:
      * 	执行耗时:0 ms,击败了100.00% 的Java用户
+     * 	内存消耗:40.91,击败了45.71% 的Java用户
+     * @param board
+     */
+    public void gameOfLife(int[][] board) {
+        int m = board.length;
+        int n = board[0].length;
+        for(int i = 0 ; i < m ; i++) {
+            for (int j = 0; j < n; j++) {
+                int live = 0;
+                for (int[] d : dir) {
+                    int x = i + d[0];
+                    int y = j + d[1];
+                    if (x >= 0 && x < m && y >= 0 && y < n && Math.abs(board[x][y]) == 1) {
+                        live++;
+                    }
+                }
+                if(board[i][j] == 0){
+                    board[i][j] = live == 3 ? 2 : 0;
+                }else{
+                    board[i][j] = (live == 2 || live == 3) ? 1 : -1;
+                }
+            }
+        }
+        for(int i = 0 ; i < m ; i++) {
+            for (int j = 0; j < n; j++) {
+                board[i][j] = board[i][j] > 0 ? 1 : 0;
+            }
+        }
+    }
+    /**
+     * 解答成功:
+     * 	执行耗时:0 ms,击败了100.00% 的Java用户
      * 	内存消耗:41 MB,击败了25.84% 的Java用户
      * @param board
      */
@@ -41,7 +73,7 @@ class GameOfLife_289 {
      * 	内存消耗:41 MB,击败了11.37% 的Java用户
      * @param board
      */
-    public void gameOfLife(int[][] board) {
+    public void gameOfLifeOfficial(int[][] board) {
         int[] neighbors = {0, 1, -1};
 
         int rows = board.length;
