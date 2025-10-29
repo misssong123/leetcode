@@ -1,6 +1,6 @@
 package com.meng.top100.leetcode.editor.cn;
 
-class GameOfLife289 {
+class GameOfLife_289 {
     private final static int[][] dir = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 
     /**
