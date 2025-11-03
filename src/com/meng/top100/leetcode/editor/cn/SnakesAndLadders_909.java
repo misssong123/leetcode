@@ -5,48 +5,33 @@ import java.util.Queue;
 
 class SnakesAndLadders_909 {
     /**
-     * 有误
+     * 解答成功:
+     * 执行耗时:4 ms,击败了89.43% 的Java用户
+     * 内存消耗:46.04 MB,击败了5.03% 的Java用户
      * @param board
      * @return
      */
     public int snakesAndLadders909(int[][] board) {
         int n = board.length;
-        int target = n * n ;
-        boolean[] visited = new boolean[n * n + 1];
-        Queue<Integer> queue = new LinkedList<>();
-        int step = 0;
-        queue.add(1);
-        visited[1] = true;
+        int target = n * n;
+        boolean[] visited = new boolean[target + 1];
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{1,0});
         while (!queue.isEmpty()){
-            step++;
-            int size = queue.size();
-            while (size > 0){
-                Integer index = queue.poll();
-                for(int i = index + 1 ; i <= Math.min(index + 6,target) ; i++){
-                    if (!visited[i]){
-                        int num = i;
-                        visited[num] = true;
-                        int[] pos = findJudge(i , board);
-                        if (board[pos[0]][pos[1]] == -1){
-                            queue.add(num);
-                        }
-                        while (board[pos[0]][pos[1]] != -1){
-                            num = board[pos[0]][pos[1]];
-                            if (visited[num]){
-                                break;
-                            }
-                            visited[num] = true;
-                            pos = findJudge(num , board);
-                            if (board[pos[0]][pos[1]] == -1){
-                                queue.add(num);
-                            }
-                        }
-                    }
-                    if (visited[target]){
-                        return step;
-                    }
+            int[] cur = queue.poll();
+            visited[cur[0]] = true;
+            for(int i = cur[0] + 1 ;i <= Math.min(cur[0] + 6,target);i++){
+                int[] next = findJudge(i,board);
+                int num = board[next[0]][next[1]];
+                if (num == -1){
+                    num = i;
                 }
-                size--;
+                if (num == target){
+                    return cur[1] + 1;
+                }
+                if (!visited[num]){
+                    queue.offer(new int[]{num,cur[1] + 1});
+                }
             }
         }
         return -1;
@@ -60,6 +45,14 @@ class SnakesAndLadders_909 {
         }
         return new int[]{x,y};
     }
+
+    /**
+     * 解答成功:
+     * 执行耗时:3 ms,击败了98.91% 的Java用户
+     * 内存消耗:45.70 MB,击败了5.03% 的Java用户
+     * @param board
+     * @return
+     */
     public int snakesAndLadders(int[][] board) {
         int n = board.length;
         boolean[] vis = new boolean[n * n + 1];
