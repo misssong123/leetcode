@@ -71,7 +71,7 @@ class MinOperations3542 {
      * @param nums
      * @return
      */
-    public int minOperations(int[] nums) {
+    public int minOperationsOfficial(int[] nums) {
         List<Integer> s = new ArrayList<>();
         int res = 0;
         for (int a : nums) {
@@ -87,5 +87,30 @@ class MinOperations3542 {
         return res;
     }
 
+    /**
+     * 解答成功:
+     * 	执行耗时:41 ms,击败了34.07% 的Java用户
+     * 	内存消耗:130.74 MB,击败了5.49% 的Java用户
+     * @param nums
+     * @return
+     */
+    public int minOperations(int[] nums) {
+        Deque<Integer> stack = new LinkedList<>();
+        int ans = 0;
+        boolean containZero = false;
+        for (int x : nums){
+            while(!stack.isEmpty() && stack.peek() > x){
+                stack.pop();
+                ans++;
+            }
+            if(stack.isEmpty() || stack.peek() < x){
+                stack.push(x);
+            }
+            if (x == 0){
+                containZero = true;
+            }
+        }
+        return ans + stack.size() - (containZero?1:0);
+    }
 
 }
