@@ -2,7 +2,13 @@ package com.meng.top100.leetcode.editor.cn;
 
 import java.util.*;
 
-class WordBreak139 {
+class WordBreak_139 {
+    public static void main(String[] args) {
+        WordBreak_139 demo = new WordBreak_139();
+        String s = "aaaaaaa";
+        List<String> wordDict = Arrays.asList("aaaa", "aa");
+        System.out.println(demo.wordBreak139(s, wordDict));
+    }
     /**
      * 解答成功:
      * 	执行耗时:7 ms,击败了66.97% 的Java用户
@@ -13,26 +19,25 @@ class WordBreak139 {
      */
     public boolean wordBreak139(String s, List<String> wordDict) {
         Set<String> set = new HashSet<>(wordDict);
-        Map<Integer,Boolean> cache = new HashMap<>();
-        return wordDict(s,set,0,cache);
+        int n = s.length();
+        int[] cache = new int[n+1];
+        Arrays.fill(cache,-1);
+        return wordDict(s,set,n,cache) == 1;
     }
 
-    private boolean wordDict(String s, Set<String> set, int index,Map<Integer,Boolean> cache) {
-        if (index >= s.length()){
-            return true;
+    private int wordDict(String s, Set<String> set, int index,int[] cache) {
+        if (index == 0){
+            return 1;
         }
-        if (cache.containsKey(index)){
-            return cache.get(index);
+        if (cache[index] != -1){
+            return cache[index];
         }
-        boolean res = false;
-        for (int i = index ;i < s.length(); i++){
-            if (set.contains(s.substring(index,i+1)) && wordDict(s,set,i+1,cache)){
-                res = true;
-                break;
+        for (int i = index - 1 ;i >= 0; i--){
+            if (set.contains(s.substring(i,index)) && wordDict(s,set,i,cache) == 1){
+                return cache[index] = 1;
             }
         }
-        cache.put(index,res);
-        return res;
+        return cache[index] = 0;
     }
 
     /**
