@@ -39,7 +39,7 @@ class KSmallestPairsLCR061 {
      * @param k
      * @return
      */
-    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+    public List<List<Integer>> kSmallestPairsOther(int[] nums1, int[] nums2, int k) {
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
         pq.add(new int[]{nums1[0] + nums2[0], 0, 0});
 
@@ -57,5 +57,30 @@ class KSmallestPairsLCR061 {
             }
         }
         return ans;
+    }
+    /**
+     * 解答成功:
+     * 	执行耗时:38 ms,击败了29.46% 的Java用户
+     * 	内存消耗:122.9 MB,击败了5.22% 的Java用户
+     * @param nums1
+     * @param nums2
+     * @param k
+     * @return
+     */
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        PriorityQueue<int[]> queue = new PriorityQueue<>(Comparator.comparingInt(a -> a[2]));
+        queue.add(new int[]{0,0,nums1[0]+nums2[0]});
+        List<List<Integer>> list = new ArrayList<>();
+        while (k-- > 0 && !queue.isEmpty()){
+            int[] cur = queue.poll();
+            list.add(Arrays.asList(nums1[cur[0]],nums2[cur[1]]));
+            if(cur[1] == 0 && cur[0] + 1 < nums1.length){
+                queue.add(new int[]{cur[0]+1,0,nums1[cur[0]+1]+nums2[0]});
+            }
+            if (cur[1] + 1 < nums2.length){
+                queue.add(new int[]{cur[0],cur[1]+1,nums1[cur[0]]+nums2[cur[1]+1]});
+            }
+        }
+        return list;
     }
 }
