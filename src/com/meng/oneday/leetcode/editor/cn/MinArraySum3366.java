@@ -1,6 +1,8 @@
+package com.meng.oneday.leetcode.editor.cn;
+
 import java.util.*;
 
-class Solution {
+class MinArraySum3366 {
     /**
      * 想法有误
      * @param nums
