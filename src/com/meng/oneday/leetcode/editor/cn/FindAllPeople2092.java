@@ -75,6 +75,15 @@ class FindAllPeople2092 {
         return x;
     }
 
+    /**
+     * 解答成功:
+     * 	执行耗时:161 ms,击败了6.52% 的Java用户
+     * 	内存消耗:238.4 MB,击败了5.08% 的Java用户
+     * @param n
+     * @param meetings
+     * @param firstPerson
+     * @return
+     */
     public List<Integer> findAllPeopleOther(int n, int[][] meetings, int firstPerson) {
         // 按照 time 从小到大排序
         Arrays.sort(meetings, (a, b) -> a[2] - b[2]);
