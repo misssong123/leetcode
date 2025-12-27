@@ -21,12 +21,12 @@ class MostBooked2402 {
             }
             return a[1] - b[1];
         });
-        PriorityQueue<Integer> unUsedQueue = new PriorityQueue<>(Comparator.comparingInt(a -> a));
+        PriorityQueue<Integer> unUsedQueue = new PriorityQueue<>();
         for (int i = 0 ; i < n ; i++){
             unUsedQueue.offer(i);
         }
         //按照开始时间排序
-        Arrays.sort(meetings, (a, b) -> a[0] - b[0]);
+        Arrays.sort(meetings, Comparator.comparingInt(a -> a[0]));
         for (int[] meeting : meetings) {
             int time = meeting[0];
            while (!usedQueue.isEmpty() && usedQueue.peek()[1] <= time){
